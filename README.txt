@@ -9,34 +9,20 @@ Sample Run *****
 
 In order to run my code, I input the following commands on separate tabs in my localhost for the link emulator, sender and receiver respectively:
 
-  LINK EMULATOR: $ ./newudpl -vv -o160.39.148.179:4000 -i160.39.148.179:* [FLAGS]
+  LINK EMULATOR: $ ./newudpl -vv -oathens:4000 -iathens:* [FLAGS]
 
   FLAGS: I used the flags -O50 , -B50 , -d0.8 , -L10 . I recommend using these flags given the MSS and file size (69 packets
           each with a payload of 556 bytes maximum + 20 byte header)
 
-  RECEIVER: $ python receiver.py received_file.txt 4000 160.39.148.179 4001 stdout
+  RECEIVER: $ python receiver.py received_file.txt 4000 athens 4001 stdout
 
             $ receiver.py [receiving_filename] [listening_port] [sender_IP] [sender_port] [log_filename]
 
-  SENDER: $ python sender.py original_file.txt 160.39.148.179 41192 4001 stdout 1
+  SENDER: $ python sender.py original_file.txt athens 41192 4001 stdout 1
 
           $ sender.py [sending_filename] [remote_IP] [remote_port] [ack_port] [log_filename] [window_size]
 
   VERIFY FILE TRANSMISSION WITH $ diff [sending_filename] [receiving_filename]
-
-
- PLEASE NOTE ****  The reason that I use port 41192 is because the udp link proxy captures incoming packets on that port.
-                   Below is the prompt that I was prompted with
-
-                   Link established:
-                      dyn-160-39-148-179.dyn.columbia.edu(160.39.148.179)/***** ->
-                                  dyn-160-39-148-179.dyn.columbia.edu(160.39.148.179)/41192
-                      /41193 ->
-                                  dyn-160-39-148-179.dyn.columbia.edu(160.39.148.179)/4000
-
-
-                    160.39.148.179 is my public IP address, but on clic machines you can use the alias "athens" (or
-                    any of the of the other machine aliases) instead to replace it. Please note the udp link proxy sometimes mistranslates localhost to 160.39.148.179 instead of 127.00.0.
 
 
 
